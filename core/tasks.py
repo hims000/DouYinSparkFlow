@@ -252,19 +252,18 @@ def do_user_task(browser, username, cookies, targets):
         page.wait_for_selector(chat_input_selector, timeout=config["browserTimeout"])
         chat_input = page.locator(chat_input_selector)
 
-        # 在 chat-input-dccKiL 中输入内容
+        # 输入消息内容
         message = build_message()
-        for line in message.split("\\n"):
-            chat_input.type(line)  # 输入每一行
-            # 如果不是最后一行，模拟 Shift+Enter 插入换行
-            if line != message.split("\\n")[-1]:
-                chat_input.press("Shift+Enter")  # 模拟 Shift+Enter 插入换行
+        chat_input.click()
+        time.sleep(0.3)
+        chat_input.fill(message)
+        time.sleep(0.5)
 
         logger.debug(f"账号 {username} 准备发送消息给好友 {username}：\n\t{message}")
-        logger.debug(f"账号 {username} 给好友 {username} 发送消息完成")
         # 模拟按下回车键发送消息
-        chat_input.press("Enter")
-        time.sleep(2)  # 发送完等待一会儿
+        page.keyboard.press("Enter")
+        time.sleep(2)
+        logger.debug(f"账号 {username} 给好友 {username} 发送消息完成")
 
     context.close()  # 任务完成后关闭上下文
 
