@@ -255,12 +255,12 @@ def do_user_task(browser, username, cookies, targets):
         # 输入消息内容
         message = build_message()
         chat_input.click()
-        time.sleep(0.3)
-        chat_input.fill(message)
+        time.sleep(0.5)
+        page.keyboard.insertText(message)
         time.sleep(0.5)
 
         logger.debug(f"账号 {username} 准备发送消息给好友 {username}：\n\t{message}")
-        # 模拟按下回车键发送消息
+        # 发送消息
         page.keyboard.press("Enter")
         time.sleep(2)
         logger.debug(f"账号 {username} 给好友 {username} 发送消息完成")
