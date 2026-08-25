@@ -256,7 +256,7 @@ def do_user_task(browser, username, cookies, targets):
         message = build_message()
         chat_input.click()
         time.sleep(0.3)
-        page.keyboard.insertText(message)
+        page.keyboard.type(message, delay=50)
         time.sleep(0.5)
 
         logger.debug(f"账号 {username} 准备发送消息给好友 {username}：\n\t{message}")
